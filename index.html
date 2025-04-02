@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>HTML + CSS</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>Feedback Form</h1>
+    <br />
+    <br />
+    <form id="feedbackForm">
+      <label for="nameUser">Name:</label>
+      <input type="text" id="nameUser" />
+      <br />
+      <br />
+      <label for="feedback">Feedback:</label>
+      <br />
+      <textarea id="feedback" rows="4" cols="50"></textarea>
+      <br />
+      <br />
+
+      <label>Rate our service:</label>
+      <br />
+      <label for="excellent">
+        <input
+          type="radio"
+          name="service"
+          value="Excellent"
+          id="excellent"
+        />Excellent
+      </label>
+      <br />
+      <label for="Good">
+        <input type="radio" name="service" value="Good" id="Good" />Good
+      </label>
+      <br />
+      <label for="Fair">
+        <input type="radio" name="service" value="Fair" id="Fair" />Fair
+      </label>
+      <br />
+      <br />
+
+      <label>Select Topics of Interest:</label>
+      <br />
+      <label for="Technology">
+        <input
+          type="checkbox"
+          name="interest"
+          value="Technology"
+          id="Technology"
+        />Technology
+      </label>
+      <br />
+      <label for="Travel">
+        <input
+          type="checkbox"
+          name="interest"
+          value="Travel"
+          id="Travel"
+        />Travel
+      </label>
+      <br />
+      <label for="Food">
+        <input type="checkbox" name="interest" value="Food" id="Food" />Food
+      </label>
+      <br />
+      <br />
+
+      <label>Overall Experience:</label>
+      <select id="overallExp">
+        <option value="Very Satisfied">Very Satisfied</option>
+        <option value="Satisfied">Satisfied</option>
+        <option value="Neutral">Neutral</option>
+      </select>
+      <br />
+      <br />
+
+      <input type="submit" value="Submit" />
+    </form>
+
+    <div id="feedbackInfo"></div>
+
+    <script>
+      const feedbackForm = document.getElementById("feedbackForm");
+      feedbackForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        const nameUser = document.getElementById("nameUser").value;
+        const feedback = document.getElementById("feedback").value;
+        const selectService = document.querySelector(
+          'input[name="service"]:checked'
+        ).value;
+
+        const interest = document.querySelectorAll(
+          'input[name="interest"]:checked'
+        );
+        let selectedInterest = [];
+        for (let i = 0; i < interest.length; i++) {
+          selectedInterest.push(interest[i].value);
+        }
+
+        const overallExp = document.getElementById("overallExp").value;
+
+        console.log(
+          nameUser,
+          feedback,
+          selectService,
+          selectedInterest,
+          overallExp
+        );
+
+        const UserData = `<h2>Feedback Submitted:</h2>
+        <p><strong>Name: </strong>${nameUser}</p>
+        <p><strong>Feedback: </strong>${feedback}</p>
+        <p><strong>Rate our service: </strong>${selectService}</p>
+        <p><strong>Select Topics of Interest: </strong>${selectedInterest}</p>
+        <p><strong>Overall Experience: </strong>${overallExp}</p>`;
+
+        const divElement = document.getElementById("feedbackInfo");
+        divElement.innerHTML = UserData;
+      });
+    </script>
+  </body>
+</html>
